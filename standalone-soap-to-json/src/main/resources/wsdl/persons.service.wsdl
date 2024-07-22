@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.soap.services.irritatedtown.mnms.sample.io/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://sample.service.io/" name="InMemoryPersonServiceService" targetNamespace="http://services.soap.services.irritatedtown.mnms.sample.io/">
+  <wsdl:import location="http://localhost:8080/soap/services/persons?wsdl=PersonInformation.wsdl" namespace="http://sample.service.io/">
+    </wsdl:import>
+  <wsdl:binding name="InMemoryPersonServiceServiceSoapBinding" type="ns1:PersonInformation">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="fetchPersons">
+      <soap:operation soapAction="urn:personsInformation" style="document"/>
+      <wsdl:input name="fetchPersons">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchPersonsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findById">
+      <soap:operation soapAction="urn:personInformation" style="document"/>
+      <wsdl:input name="findById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InMemoryPersonServiceService">
+    <wsdl:port binding="tns:InMemoryPersonServiceServiceSoapBinding" name="InMemoryPersonServicePort">
+      <soap:address location="http://localhost:8080/soap/services/persons"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
