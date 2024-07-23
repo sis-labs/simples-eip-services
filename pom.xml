@@ -14,6 +14,7 @@
         <module>sb-soap-to-json</module>
         <module>common-client</module>
         <module>sb-rest-api</module>
+        <module>common-domain</module>
     </modules>
 
     <properties>
