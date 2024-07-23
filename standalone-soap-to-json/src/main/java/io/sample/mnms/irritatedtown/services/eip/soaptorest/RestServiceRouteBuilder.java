@@ -14,7 +14,7 @@ public class RestServiceRouteBuilder extends RouteBuilder {
   @Override
   public void configure() throws Exception {
     // basic configuration to expose web service with Apache Camel.
-    restConfiguration().component("jetty").host("localhost").port(8080).bindingMode(RestBindingMode.json);
+    restConfiguration().component("jetty").host("localhost").port(8081).bindingMode(RestBindingMode.json);
 
     // Creating rest web service from raw using '/rest' as base context.
     // We are using '/rest' for rest endpoints and '/soap' for SOAP endpoint in this project.
