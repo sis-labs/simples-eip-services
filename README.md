@@ -1,4 +1,18 @@
-# Modular application
+# Irritated town
+
+## Preparing the project
+In order to prepare the project, use the following procedure.
+
+1. Go on your vcs hosting service (github, gitlab, bitbucket, ...)
+2. Create a new project (use the right location according to company / team policies)
+3. Copy the uri of the repository (appear in a line like `git remote add origin <an_uri>`)
+4. Go on your bash (gitbash if you are using mswin).
+5. Position your bash at the root of your local git repository (a clone of this repository normally)
+6. Use the command `git remote add origin <uri>` where the uri is the one you copied on point 3.
+7. Sync the remote repository with the following command `git push origing --all`.
+8. Go on the web application of your remote repository to check if everything is in sync or use `git branch -a`
+
+You are now ready
 
 ## Cloning the project
 
@@ -14,10 +28,10 @@ git config user.email
 
 ii. Run the script to prepare git aliases
 ```bash
-.devtools/git/aliases.sh
+.devtools/scripts/git_aliases.sh
 
-# confirm the use by running
-git ver
+# confirm the correct running by
+git config --get-regexp ^alias
 ```
 
 iii. Clone the projet and reset it to a git initial state
