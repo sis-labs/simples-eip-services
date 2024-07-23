@@ -4,6 +4,7 @@ import io.sample.mnms.irritatedtown.domain.PhysicalPerson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class InMemoryPersonService implements PersonsService {
@@ -18,5 +19,15 @@ public class InMemoryPersonService implements PersonsService {
   @Override
   public List<PhysicalPerson> fetchPersons() {
     return persons;
+  }
+
+  @Override
+  public Optional<PhysicalPerson> findById(final UUID personId) {
+    return persons.stream().filter(p -> p.id().equals(personId)).findFirst();
+  }
+
+  @Override
+  public Optional<PhysicalPerson> findById(final String personId) {
+    return findById(UUID.fromString(personId));
   }
 }
