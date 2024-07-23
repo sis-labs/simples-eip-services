@@ -25,9 +25,4 @@ public class InMemoryPersonService implements PersonsService {
   public Optional<PhysicalPerson> findById(final UUID personId) {
     return persons.stream().filter(p -> p.id().equals(personId)).findFirst();
   }
-
-  @Override
-  public Optional<PhysicalPerson> findById(final String personId) {
-    return findById(UUID.fromString(personId));
-  }
 }

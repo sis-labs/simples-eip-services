@@ -36,5 +36,7 @@ public interface PersonsService {
    * @param personId the unique id of the person to fetch information for
    * @return the person if it exists or an empty optional otherwise.
    */
-  Optional<PhysicalPerson> findById(String personId);
+  default Optional<PhysicalPerson> findById(String personId) {
+    return findById(UUID.fromString(personId));
+  }
 }

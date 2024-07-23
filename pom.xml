@@ -31,6 +31,7 @@
         <mockito.version>5.12.0</mockito.version>
         <byte-butty.version>1.14.18</byte-butty.version>
         <objenesis.version>3.3</objenesis.version>
+        <cxf.version>4.0.4</cxf.version>
     </properties>
 
     <dependencyManagement>
