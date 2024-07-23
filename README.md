@@ -60,6 +60,14 @@ a pure Spring boot implementation for the client webservice which seems to be su
 
 --- *Here is the screenshot for the layout* --
 
+| Name                    | Descripton                                                                                        | Note |
+|-------------------------|---------------------------------------------------------------------------------------------------|------|
+| common-client           | Common webservice client                                                                          |      |
+| sb-soap-to-json         | Spring boot based implementation of the service which is using Camel                              |      |
+| soap-service            | Fake implementation of the soap service                                                           |      |
+| standalone-soap-to-json | Standalone implementation of the Soap to JSON which is only using Camel to implement the process. |      |
+| sb-rest-api             | Pure SpringBoot implementation which is not using Camel                                           |      |
+
 ### SOAP
 The mock implementation is dedicated to use as a standalone predictive dynamic backend. It acts as the
 Citizen SOAP webservice for person. It is pretty simple but use a code first approach.
@@ -74,6 +82,9 @@ have a soap client, you can use the WSDL to configure the service and requesting
 
 Take care this backend implementation is used during the integration testing. Do not remove it without revewing
 implementation from the testing projects (irritated-town-it`).
+
+> **Note:** In order to compile the `common-client` project, you have to start the `soap-client` project since the
+> wsdl generation process will connect to the remote service.
 
 ### Camel Route (Standalone)
 The `standalone-route` is a standalone version of the Camel integration. It is using the stack in a plain
