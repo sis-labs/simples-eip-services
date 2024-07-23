@@ -13,6 +13,7 @@
         <module>standalone-soap-to-json</module>
         <module>sb-soap-to-json</module>
         <module>common-client</module>
+        <module>sb-rest-api</module>
     </modules>
 
     <properties>
