@@ -23,11 +23,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <camel.version>4.6.0</camel.version>
+        <camel.version>4.7.0</camel.version>
         <spring-boot.version>3.3.0</spring-boot.version>
         <log4j.version>2.23.1</log4j.version>
-        <junit.version>5.10.2</junit.version>
+        <junit.version>5.10.3</junit.version>
         <mockito.version>5.12.0</mockito.version>
+        <byte-butty.version>1.14.18</byte-butty.version>
+        <objenesis.version>3.3</objenesis.version>
     </properties>
 
     <dependencyManagement>
@@ -61,6 +63,21 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte-butty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy-agent</artifactId>
+                <version>${byte-butty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.objenesis</groupId>
+                <artifactId>objenesis</artifactId>
+                <version>${objenesis.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -170,5 +187,38 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.3.1</version>
+                <!--
+                This workaround is mandatory to avoid mockito / byte-buddy issue regarding the
+                issue which produce the following stack trace:
+                Caused by: java.lang.IllegalStateException: Could not self-attach to current VM using external
+                process - set a property net.bytebuddy.agent.attacher.dump to dump the process output to a file at the
+                specified location
+                -->
+                <configuration>
+                    <argLine>-Djdk.attach.allowAttachSelf=true </argLine>
+                    <argLine>-Dnet.bytebuddy.experimental=true</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

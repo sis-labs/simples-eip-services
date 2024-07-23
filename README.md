@@ -147,3 +147,10 @@ specification.
 
 ### Pure Spring Boot integration.
 This implementation is using
+
+### Running tests
+In order to run the test, for now, you have to manually add the following information on the command line
+
+See [here](https://github.com/raphw/byte-buddy/issues/1396) and [here](https://stackoverflow.com/questions/41956692/could-not-initialize-plugin-interface-org-mockito-plugins-mockmaker))
+
+`-Djdk.attach.allowAttachSelf=true  -Dnet.bytebuddy.experimental=true`
