@@ -8,5 +8,6 @@ class SbStandaloneApplicationTest {
 
   @Test
   void contextLoads() {
+    // nothing to do.
   }
 }

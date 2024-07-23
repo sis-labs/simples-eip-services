@@ -215,8 +215,7 @@
                 specified location
                 -->
                 <configuration>
-                    <argLine>-Djdk.attach.allowAttachSelf=true </argLine>
-                    <argLine>-Dnet.bytebuddy.experimental=true</argLine>
+                    <argLine>-Djdk.attach.allowAttachSelf=true -Dnet.bytebuddy.experimental=true</argLine>
                 </configuration>
             </plugin>
         </plugins>
