@@ -1,16 +1,12 @@
-package io.sample.mnms.irritatedtown.services.rest.persons.services;
+package io.sample.mnms.irritatedtown.domain.services;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryPersonServiceTest {
-
   private final InMemoryPersonService service = new InMemoryPersonService();
 
   @Test
@@ -76,5 +72,4 @@ class InMemoryPersonServiceTest {
     // THEN
     assertTrue(oPerson.isEmpty());
   }
-
 }

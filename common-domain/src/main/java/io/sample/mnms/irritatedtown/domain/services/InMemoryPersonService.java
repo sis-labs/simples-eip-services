@@ -1,4 +1,4 @@
-package io.sample.mnms.irritatedtown.services.rest.persons.services;
+package io.sample.mnms.irritatedtown.domain.services;
 
 import io.sample.mnms.irritatedtown.domain.PhysicalPerson;
 

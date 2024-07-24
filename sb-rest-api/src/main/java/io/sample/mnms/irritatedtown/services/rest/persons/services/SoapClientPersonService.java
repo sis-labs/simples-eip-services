@@ -1,6 +1,7 @@
 package io.sample.mnms.irritatedtown.services.rest.persons.services;
 
 import io.sample.mnms.irritatedtown.domain.PhysicalPerson;
+import io.sample.mnms.irritatedtown.domain.services.PersonsService;
 import io.sample.mnms.irritatedtown.domain.transformations.PhysicalPersonMapper;
 import io.service.sample.PersonInformation;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;

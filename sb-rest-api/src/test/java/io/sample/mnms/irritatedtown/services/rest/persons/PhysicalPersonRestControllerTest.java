@@ -3,7 +3,7 @@ package io.sample.mnms.irritatedtown.services.rest.persons;
 import io.sample.mnms.irritatedtown.domain.PhysicalPerson;
 import io.sample.mnms.irritatedtown.presentation.dtos.PhysicalPersonDto;
 import io.sample.mnms.irritatedtown.presentation.mappers.PhysicalPersonDtoMapper;
-import io.sample.mnms.irritatedtown.services.rest.persons.services.PersonsService;
+import io.sample.mnms.irritatedtown.domain.services.PersonsService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
