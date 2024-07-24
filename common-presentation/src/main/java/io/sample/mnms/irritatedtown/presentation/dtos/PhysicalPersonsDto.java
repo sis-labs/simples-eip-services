@@ -1,4 +1,4 @@
-package io.sample.mnms.irritatedtown.services.rest.persons;
+package io.sample.mnms.irritatedtown.presentation.dtos;
 
 import java.util.List;
 

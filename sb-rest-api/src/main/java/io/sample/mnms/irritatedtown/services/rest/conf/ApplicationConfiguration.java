@@ -1,7 +1,7 @@
 package io.sample.mnms.irritatedtown.services.rest.conf;
 
 import io.sample.mnms.irritatedtown.domain.transformations.PhysicalPersonMapper;
-import io.sample.mnms.irritatedtown.services.rest.persons.PhysicalPersonDtoMapper;
+import io.sample.mnms.irritatedtown.presentation.mappers.PhysicalPersonDtoMapper;
 import io.sample.mnms.irritatedtown.services.rest.persons.services.PersonsService;
 import io.sample.mnms.irritatedtown.services.rest.persons.services.SoapClientPersonService;
 import io.service.sample.PersonInformation;

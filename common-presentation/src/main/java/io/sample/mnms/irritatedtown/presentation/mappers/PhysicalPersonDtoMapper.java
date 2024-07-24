@@ -1,6 +1,7 @@
-package io.sample.mnms.irritatedtown.services.rest.persons;
+package io.sample.mnms.irritatedtown.presentation.mappers;
 
 import io.sample.mnms.irritatedtown.domain.PhysicalPerson;
+import io.sample.mnms.irritatedtown.presentation.dtos.PhysicalPersonDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

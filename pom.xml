@@ -15,6 +15,7 @@
         <module>common-client</module>
         <module>sb-rest-api</module>
         <module>common-domain</module>
+        <module>common-presentation</module>
     </modules>
 
     <properties>

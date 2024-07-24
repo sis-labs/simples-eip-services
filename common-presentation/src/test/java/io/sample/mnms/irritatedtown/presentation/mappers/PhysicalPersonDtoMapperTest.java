@@ -1,4 +1,4 @@
-package io.sample.mnms.irritatedtown.services.rest.persons;
+package io.sample.mnms.irritatedtown.presentation.mappers;
 
 import io.sample.mnms.irritatedtown.domain.PhysicalPerson;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PhysicalPersonDtoMapperTest {
+
   @Test
   void mapSuccessfully() {
     // GIVEN
