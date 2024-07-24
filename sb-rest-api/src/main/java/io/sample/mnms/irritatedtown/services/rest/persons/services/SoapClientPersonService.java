@@ -18,10 +18,7 @@ import java.util.UUID;
  */
 public class SoapClientPersonService implements PersonsService {
 
-  /**
-   * The uri of the remote service to fetch information from
-   */
-  private final String serviceUri;
+  private final PersonInformation personInformationService;
 
   /**
    * Mapper to use to transform remote object to domain object.
@@ -31,12 +28,12 @@ public class SoapClientPersonService implements PersonsService {
   /**
    * Create a new instance of the service.
    *
-   * @param serviceUri           the uri of the service to fetch information from
-   * @param physicalPersonMapper the mapper to use to transform remote object to local object
+   * @param personInformationService remote service to adapt (this class acts as an adapter for the remote service)
+   * @param physicalPersonMapper     the mapper to use to transform remote object to local object
    */
-  public SoapClientPersonService(final String serviceUri,
+  public SoapClientPersonService(final PersonInformation personInformationService,
                                  final PhysicalPersonMapper physicalPersonMapper) {
-    this.serviceUri = serviceUri;
+    this.personInformationService = personInformationService;
     this.physicalPersonMapper = physicalPersonMapper;
   }
 
@@ -49,7 +46,7 @@ public class SoapClientPersonService implements PersonsService {
    * the service since it may be a bit expensive in terms of performance. We are considering it is sufficient for the
    * POC to recreate the instance of the service each time.
    */
-  private PersonInformation getService() {
+  private PersonInformation getService(final String serviceUri) {
     final var factory = new JaxWsProxyFactoryBean();
     factory.setServiceClass(PersonInformation.class);
     factory.setAddress(serviceUri);
@@ -58,14 +55,12 @@ public class SoapClientPersonService implements PersonsService {
 
   @Override
   public List<PhysicalPerson> fetchPersons() {
-    final var service = getService();
-    return service.fetchPersons().stream().map(physicalPersonMapper::toPhysicalPerson).toList();
+    return personInformationService.fetchPersons().stream().map(physicalPersonMapper::toPhysicalPerson).toList();
   }
 
   @Override
   public Optional<PhysicalPerson> findById(final UUID personId) {
-    final var service = getService();
-    final var person = service.findById(personId.toString());
+    final var person = personInformationService.findById(personId.toString());
     if (null == person) {
       return Optional.empty();
     }
