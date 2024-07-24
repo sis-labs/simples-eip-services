@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Wrapper class for the spring boot application.
  *
  * <p>The application publishes a simple soap web service using a code first approach for
- * his implementation. The idea behind that is only to create a functional lab which
- * reproduces the behavior of the real world application.</p>
+ * his implementation. The idea behind that is only to create a functional lab which reproduces the behavior of the real
+ * world application.</p>
  *
  * @author mgaspoz
  * @version 0.0.1

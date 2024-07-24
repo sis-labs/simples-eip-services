@@ -1,6 +1,7 @@
 # Irritated town
 
 ## Preparing the project
+
 In order to prepare the project, use the following procedure.
 
 1. Go on your vcs hosting service (github, gitlab, bitbucket, ...)
@@ -19,6 +20,7 @@ You are now ready
 ### 1. Prepare your environment
 
 i. Ensure about your git configuration
+
 ```bash
 git config user.name
 # should output your name
@@ -27,6 +29,7 @@ git config user.email
 ```
 
 ii. Run the script to prepare git aliases
+
 ```bash
 .devtools/scripts/git_aliases.sh
 
@@ -53,6 +56,7 @@ git commit -s -m "Initial commit"
 > **Note:** you are now ready to start coding.
 
 ## Layout of the project
+
 The project has a bunch of submodules. Some are dedicated for testing purpose (see mock)
 and the rest is the base for the implementation. There is also both version of the camel route, one
 with Springboot, the other with a lightweight implementation which is using camel directly. The last one is
@@ -63,12 +67,14 @@ a pure Spring boot implementation for the client webservice which seems to be su
 | Name                    | Descripton                                                                                        | Note |
 |-------------------------|---------------------------------------------------------------------------------------------------|------|
 | common-client           | Common webservice client                                                                          |      |
+| common-domain           | Common domain related implementation                                                              |      |
 | sb-soap-to-json         | Spring boot based implementation of the service which is using Camel                              |      |
 | soap-service            | Fake implementation of the soap service                                                           |      |
 | standalone-soap-to-json | Standalone implementation of the Soap to JSON which is only using Camel to implement the process. |      |
 | sb-rest-api             | Pure SpringBoot implementation which is not using Camel                                           |      |
 
 ### SOAP
+
 The mock implementation is dedicated to use as a standalone predictive dynamic backend. It acts as the
 Citizen SOAP webservice for person. It is pretty simple but use a code first approach.
 The second one, which is almost equivalent, uses a contract first approach, which is the preferred way of
@@ -87,17 +93,20 @@ implementation from the testing projects (irritated-town-it`).
 > wsdl generation process will connect to the remote service.
 
 ### Camel Route (Standalone)
+
 The `standalone-route` is a standalone version of the Camel integration. It is using the stack in a plain
 old and simple manner.
 All configurations are provided by the `application.yml` or `application.properties` available in the `resources` folder
 (under the `main` folder). You can change the listening port, the service path and so on.
 
 To start the project, compile and package the project with the following command
+
 ```bash
 .mvnw clean package
 ```
 
 You can the run the application using the following command
+
 ```bash
 java -jar <path_to_app>.jar
 ```
@@ -106,6 +115,7 @@ You can open your browser on the url `http://localhost:8081/rest/persons` to get
 the url `http://localhost:8081/rest/persons/123` to get the details about a persons.
 
 ### Camel Route (with SpringBoot)
+
 THe `spring-boot` based route is almost equivalent of the previous one. The projet has just a bit more configuration
 in the `conf` package. To run the application, simply compile and package it `.mvnw clean compile` and run the produced
 jar with the command `java -jar <path_to_the_jar>.jar`.
@@ -115,42 +125,64 @@ to get the list of users and on the url `http://localhost:8081/rest/persons/123`
 
 ## How it works
 
-Here you will find out information about the behavior of each project. You'll also see how you can customize it according to
+Here you will find out information about the behavior of each project. You'll also see how you can customize it
+according to
 project needs.
 
 ### SOAP backend
-Since this project is optional, there is no need to customize it. However, you should reflect th real backend inside the project.
-To do that, each time the WSDL of the remote backend is modified / discovered, you have to refetch the wsdl of the service and replace
-the content of the `resources/wsld/service.wsdl` content by the new content of the file. Then, you have to recompile the project. Depending
-on the nature of the change, you may have to adapt the mock service and the tests which are using it (actually, every client should be reviewed).
-For instance, if the nature of the exchanged resource is updated (ex : a new field is added to the class `Person`), it is not necessary to update
-the implementation. However, if a new method is defined, you have to review the interface of the service and his implementation. Check code comments
+
+Since this project is optional, there is no need to customize it. However, you should reflect th real backend inside the
+project.
+To do that, each time the WSDL of the remote backend is modified / discovered, you have to refetch the wsdl of the
+service and replace
+the content of the `resources/wsld/service.wsdl` content by the new content of the file. Then, you have to recompile the
+project. Depending
+on the nature of the change, you may have to adapt the mock service and the tests which are using it (actually, every
+client should be reviewed).
+For instance, if the nature of the exchanged resource is updated (ex : a new field is added to the class `Person`), it
+is not necessary to update
+the implementation. However, if a new method is defined, you have to review the interface of the service and his
+implementation. Check code comments
 to gather more information about that.
 
 ### SOAP clients
-As you may have seen, you have a `common` module in the project. This modules defines the api of the project. At his heart, it embeds the definition of
-the remote service (the service WSDL) so that every part of the client model may be auto generated. If the WSDL is modified on the server side, import
-the new definition as the content of the file `resources/wsdl/service.wsdl`. Then recompile the module to get the fresh definition of the java classes
-by running the `mvn clean compile` command. Other projects automatically import the `common` and thus, when this project change, all dependent projects
+
+As you may have seen, you have a `common` module in the project. This modules defines the api of the project. At his
+heart, it embeds the definition of
+the remote service (the service WSDL) so that every part of the client model may be auto generated. If the WSDL is
+modified on the server side, import
+the new definition as the content of the file `resources/wsdl/service.wsdl`. Then recompile the module to get the fresh
+definition of the java classes
+by running the `mvn clean compile` command. Other projects automatically import the `common` and thus, when this project
+change, all dependent projects
 should be updated.
 
-> **Note:** Take care, when you are updating a project, othwer project with a dependance on this one may fails (if the new definition is not backward
+> **Note:** Take care, when you are updating a project, othwer project with a dependance on this one may fails (if the
+> new definition is not backward
 > compatible with the prwvious one.
 
 ### Camel Integration
-When you are updating the `common` project, you should recompile all other projects after fixing potential bugs introduce by the update. Each client is
-actually using the wsdl but this is made through the `common` project, this is why you don't have to copy the wsdl in other projects.
 
-You have to provide the open api contract inside the `resources/specs` folder in a file named `oapi3.yml`. After importing this file, you may have to review
-some of the processing to adapt the behavior to the new definition (ex: changing fields in the mapping so that json response is compliant with the open api
+When you are updating the `common` project, you should recompile all other projects after fixing potential bugs
+introduce by the update. Each client is
+actually using the wsdl but this is made through the `common` project, this is why you don't have to copy the wsdl in
+other projects.
+
+You have to provide the open api contract inside the `resources/specs` folder in a file named `oapi3.yml`. After
+importing this file, you may have to review
+some of the processing to adapt the behavior to the new definition (ex: changing fields in the mapping so that json
+response is compliant with the open api
 specification.
 
 ### Pure Spring Boot integration.
+
 This implementation is using
 
 ### Running tests
+
 In order to run the test, for now, you have to manually add the following information on the command line
 
-See [here](https://github.com/raphw/byte-buddy/issues/1396) and [here](https://stackoverflow.com/questions/41956692/could-not-initialize-plugin-interface-org-mockito-plugins-mockmaker))
+See [here](https://github.com/raphw/byte-buddy/issues/1396)
+and [here](https://stackoverflow.com/questions/41956692/could-not-initialize-plugin-interface-org-mockito-plugins-mockmaker))
 
-`-Djdk.attach.allowAttachSelf=true  -Dnet.bytebuddy.experimental=true`
+`-Djdk.attach.allowAttachSelf=true -Dnet.bytebuddy.experimental=true`

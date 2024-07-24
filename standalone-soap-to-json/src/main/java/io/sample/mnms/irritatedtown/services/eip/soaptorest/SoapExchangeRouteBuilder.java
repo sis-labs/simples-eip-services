@@ -14,6 +14,12 @@ public class SoapExchangeRouteBuilder extends RouteBuilder {
   @Override
   public void configure() throws Exception {
 
+    /*from("timer://foo?fixedRate=true&period=400")
+        .setBody(constant("This is the payload"))
+        .log("${body}")
+        // TODO: parameterize the output location.
+        .to("direct:timerExchange");*/
+
     // Processing request to fetch the list of persons
     from("direct:requestPersons")
         .log("Request the list of persons")

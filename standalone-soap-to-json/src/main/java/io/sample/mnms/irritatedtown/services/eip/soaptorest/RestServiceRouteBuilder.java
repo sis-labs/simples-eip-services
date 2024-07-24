@@ -6,7 +6,7 @@ import org.apache.camel.model.rest.RestBindingMode;
 /**
  * Route Builder Dedicated to create REST endpoint.
  *
- * @author mgaspoz
+ * @author miga
  * @version 0.0.1
  * @since 0.0.1
  */

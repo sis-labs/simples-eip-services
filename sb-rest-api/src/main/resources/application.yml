@@ -1,2 +1,4 @@
 server:
+  servlet:
+    context-path: /rest
   port: 8082

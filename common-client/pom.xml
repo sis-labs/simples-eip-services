@@ -80,6 +80,9 @@
             -->
             <resource>
                 <directory>${basedir}/target/classes</directory>
+                <includes>
+                    <include>**.wsdl</include>
+                </includes>
             </resource>
         </resources>
         <plugins>
