@@ -1,7 +1,8 @@
 package io.sample.mnms.irritatedtown.services.eip.soaptorest;
 
+import io.sample.mnms.irritatedtown.services.eip.soaptorest.processing.FetchPersonProcessor;
+import io.sample.mnms.irritatedtown.services.eip.soaptorest.processing.FetchPersonsProcessor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.rest.RestBindingMode;
 
 /**
  * Route Builder Dedicated to create SOAP Client endpoint.
@@ -23,11 +24,14 @@ public class SoapExchangeRouteBuilder extends RouteBuilder {
     // Processing request to fetch the list of persons
     from("direct:requestPersons")
         .log("Request the list of persons")
-        .transform().constant("Hello World");
+        .process(new FetchPersonsProcessor())
+        .log("Request successfully processed")
+        .transform().body();
 
     // Processing request to fetch the details of a given person
     from("direct:requestPerson")
         .log("Request details about a person")
-        .transform().constant("Bye World");
+        .process(new FetchPersonProcessor())
+        .transform().body();
   }
 }
