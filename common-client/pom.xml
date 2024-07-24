@@ -11,10 +11,6 @@
 
     <artifactId>common-client</artifactId>
 
-    <properties>
-
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>ch.vdl.mele.iwatt</groupId>
@@ -87,33 +83,6 @@
         </resources>
         <plugins>
             <!--
-            This section describe how to generate clients for the webservice provided in the WSDL.
-            -->
-            <plugin>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-codegen-plugin</artifactId>
-                <version>4.0.4</version>
-                <executions>
-                    <execution>
-                        <id>generate-sources</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <wsdlOptions>
-                                <wsdlOption>
-                                    <wsdl>src/main/resources/wsdl/persons.service.wsdl</wsdl>
-                                    <extraargs>
-                                        <extraarg>-client</extraarg>
-                                    </extraargs>
-                                </wsdlOption>
-                            </wsdlOptions>
-                        </configuration>
-                        <goals>
-                            <goal>wsdl2java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--
             Since we are using mapstruct to perform transformation, we have to set up our annotation processor.
             -->
             <plugin>
@@ -135,4 +104,113 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>jaxws</id>
+            <activation>
+                <property>
+                    <name>wsdl2java_processor</name>
+                    <value>cxf</value>
+                </property>
+            </activation>
+
+            <properties>
+                <base.service.package>io.sample.mnms.irritatedtown</base.service.package>
+                <jaxws.version>4.0.2</jaxws.version>
+                <jakarta.xml.ws-api.version>${jaxws.version}</jakarta.xml.ws-api.version>
+                <jaxws-rt.version>${jaxws.version}</jaxws-rt.version>
+                <jaxws-ri.version>${jaxws.version}</jaxws-ri.version>
+                <jaxws-maven-plugin.version>${jaxws.version}</jaxws-maven-plugin.version>
+            </properties>
+
+            <dependencies>
+                <!--
+                WSDL client generation
+                -->
+                <dependency>
+                    <groupId>jakarta.xml.ws</groupId>
+                    <artifactId>jakarta.xml.ws-api</artifactId>
+                    <version>${jakarta.xml.ws-api.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.sun.xml.ws</groupId>
+                    <artifactId>jaxws-rt</artifactId>
+                    <version>${jaxws-rt.version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.sun.xml.ws</groupId>
+                    <artifactId>jaxws-ri</artifactId>
+                    <version>${jaxws-ri.version}</version>
+                    <type>pom</type>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.sun.xml.ws</groupId>
+                        <artifactId>jaxws-maven-plugin</artifactId>
+                        <version>${jaxws-maven-plugin.version}</version>
+                        <configuration>
+                            <wsdlDirectory>${basedir}/src/main/resources</wsdlDirectory>
+                            <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+                            <extension>true</extension>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>USER_INFO</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>wsimport</goal>
+                                </goals>
+                                <configuration>
+                                    <wsdlFiles>
+                                        <wsdlFile>wsdl/persons.service.wsdl</wsdlFile>
+                                    </wsdlFiles>
+                                    <packageName>${base.service.package}.soapclient</packageName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>cxf</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <!--
+                    This section describes how to generate clients for the webservice provided in the WSDL.
+                    -->
+                    <plugin>
+                        <groupId>org.apache.cxf</groupId>
+                        <artifactId>cxf-codegen-plugin</artifactId>
+                        <version>4.0.4</version>
+                        <executions>
+                            <execution>
+                                <id>generate-sources</id>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+                                    <wsdlOptions>
+                                        <wsdlOption>
+                                            <wsdl>src/main/resources/wsdl/persons.service.wsdl</wsdl>
+                                            <wsdlLocation>classpath:wsdl/persons.service.wsdl</wsdlLocation>
+                                        </wsdlOption>
+                                    </wsdlOptions>
+                                </configuration>
+                                <goals>
+                                    <goal>wsdl2java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

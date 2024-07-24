@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InMemoryPersonServiceTest {
 
@@ -29,7 +32,7 @@ class InMemoryPersonServiceTest {
     final var personId = UUID.fromString(id);
 
     // WHEN
-    final var oPerson = service .findById(personId);
+    final var oPerson = service.findById(personId);
 
     // THEN
     assertNotNull(oPerson);

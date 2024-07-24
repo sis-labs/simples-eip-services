@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * his implementation. The idea behind that is only to create a functional lab which reproduces the behavior of the real
  * world application.</p>
  *
- * @author mgaspoz
+ * @author miga
  * @version 0.0.1
  * @since 0.0.1
  */

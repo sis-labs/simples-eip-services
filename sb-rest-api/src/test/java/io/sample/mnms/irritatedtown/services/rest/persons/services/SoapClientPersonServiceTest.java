@@ -97,6 +97,6 @@ public class SoapClientPersonServiceTest {
     // THEN
     assertTrue(pers.isEmpty());
     verify(personInformation, times(1)).findById(id);
-    verify(physicalPersonMapper, times(1)).toPhysicalPerson(any(Person.class));
+    verify(physicalPersonMapper, times(0)).toPhysicalPerson(any(Person.class));
   }
 }
