@@ -31,10 +31,10 @@ public class SoapToRestStandaloneApplication {
       try {
         camelContext.stopAllRoutes();
         camelContext.stop();
+        log.info("CamelContext stopped");
       } catch (Exception e) {
         log.error("Error when shutting down CamelContext", e);
       } finally {
-        log.info("CamelContext stopped");
         running = false;
       }
     }
