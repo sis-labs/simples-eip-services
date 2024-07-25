@@ -10,7 +10,7 @@ class PhysicalPersonTest {
   @Test
   void checkCreation() {
     // GIVEN
-    final var id = UUID.randomUUID();;
+    final var id = UUID.randomUUID();
     final var firstName = "John";
     final var lastName = "Doe";
     final var email = "john.doe@example.com";

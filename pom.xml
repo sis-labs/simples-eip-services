@@ -90,11 +90,6 @@
                 <artifactId>camel-jackson</artifactId>
                 <version>${camel.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-cxf</artifactId>
-                <version>3.17.0</version>
-            </dependency>
 
             <!-- Serde -->
             <dependency>
@@ -130,6 +125,61 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.14.0</version>
+            </dependency>
+
+            <!--
+            In order to avoid conflicts in dependencies and ensure jakarta package usage instead of javax, we
+            are overriding dependencies here.
+            -->
+            <dependency>
+                <groupId>org.eclipse.angus</groupId>
+                <artifactId>angus-mail</artifactId>
+                <version>2.0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-wsdl</artifactId>
+                <version>${cxf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-core-xml</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-spring</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-spring-xml</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-attachments</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-cxf-transport</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-http-base</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <!--<dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-cxf</artifactId>
+                <version>3.17.0</version>
+            </dependency>-->
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-support</artifactId>
+                <version>${camel.version}</version>
             </dependency>
 
             <!-- Byte code related dependencies -->

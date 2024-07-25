@@ -33,7 +33,7 @@ public interface PersonInformation {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "fetchPersons", targetNamespace = "http://sample.service.io", className = "io.sample.mnms.irritatedtown.soapclient.FetchPersons")
     @ResponseWrapper(localName = "fetchPersonsResponse", targetNamespace = "http://sample.service.io", className = "io.sample.mnms.irritatedtown.soapclient.FetchPersonsResponse")
-    public List<Person> fetchPersons();
+    List<Person> fetchPersons();
 
     /**
      * 
@@ -45,7 +45,7 @@ public interface PersonInformation {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "findById", targetNamespace = "http://sample.service.io", className = "io.sample.mnms.irritatedtown.soapclient.FindById")
     @ResponseWrapper(localName = "findByIdResponse", targetNamespace = "http://sample.service.io", className = "io.sample.mnms.irritatedtown.soapclient.FindByIdResponse")
-    public Person findById(
+    Person findById(
         @WebParam(name = "personId", targetNamespace = "")
         String personId);
 
