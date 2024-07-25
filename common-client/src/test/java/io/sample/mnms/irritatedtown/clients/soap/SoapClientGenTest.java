@@ -1,6 +1,7 @@
 package io.sample.mnms.irritatedtown.clients.soap;
 
 import io.service.sample.Person;
+import jakarta.xml.bind.JAXBContext;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,5 +24,10 @@ public class SoapClientGenTest {
     assertEquals(firstName, person.getFirstName());
     assertEquals(lastName, person.getLastName());
     assertEquals(email, person.getEmail());
+  }
+
+  @Test
+  void name() {
+    JAXBContext context = null;
   }
 }

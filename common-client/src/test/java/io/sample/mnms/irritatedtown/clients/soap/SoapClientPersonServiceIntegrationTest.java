@@ -1,4 +1,4 @@
-package io.sample.mnms.irritatedtown.services.rest.persons.services;
+package io.sample.mnms.irritatedtown.clients.soap;
 
 import io.sample.mnms.irritatedtown.domain.transformations.PhysicalPersonMapper;
 import io.service.sample.PersonInformation;

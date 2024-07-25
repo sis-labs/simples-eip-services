@@ -3,7 +3,7 @@ package io.sample.mnms.irritatedtown.services.rest.conf;
 import io.sample.mnms.irritatedtown.domain.transformations.PhysicalPersonMapper;
 import io.sample.mnms.irritatedtown.presentation.mappers.PhysicalPersonDtoMapper;
 import io.sample.mnms.irritatedtown.domain.services.PersonsService;
-import io.sample.mnms.irritatedtown.services.rest.persons.services.SoapClientPersonService;
+import io.sample.mnms.irritatedtown.clients.soap.SoapClientPersonService;
 import io.service.sample.PersonInformation;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.mapstruct.factory.Mappers;
