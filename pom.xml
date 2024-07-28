@@ -413,6 +413,7 @@
                             <exclude>**/dtos/*.class</exclude>
                             <exclude>**/io/sample/*.class</exclude>
                             <exclude>**/io/service/*.class</exclude>
+                            <exclude>**/*Application.class</exclude>
                             <exclude>io/sample/mnms/irritatedtown/services/soap/domain/*.class</exclude>
                         </excludes>
                     </configuration>
