@@ -26,9 +26,9 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="org.springframework" level="info"/>
+        <Logger name="org.springframework" level="debug"/>
         <Logger name="org.apache.cxf.wsdl" level="warn"/>
-        <Logger name="io.sample.mnms.irritatedtown.services" level="trace"/>
+        <Logger name="io.sample.mnms.irritatedtown" level="trace"/>
         <Root level="warn">
             <AppenderRef ref="Console"/>
             <!--<AppenderRef ref="File" />-->

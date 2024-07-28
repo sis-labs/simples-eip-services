@@ -37,10 +37,6 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-soap</artifactId>
         </dependency>
-        <!--<dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-cxf</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -93,6 +89,7 @@
             </resource>
         </resources>
         <plugins>
+
             <!--
             Since we are using mapstruct to perform transformation, we have to set up our annotation processor.
             -->
