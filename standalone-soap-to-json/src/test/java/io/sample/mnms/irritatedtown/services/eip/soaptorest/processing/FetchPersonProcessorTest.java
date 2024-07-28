@@ -38,7 +38,7 @@ class FetchPersonProcessorTest {
     final var message = mock(Message.class);
     when(exchange.getIn()).thenReturn(message);
     when(message.getHeader("id", String.class)).thenReturn(personId);
-    when(message.getBody(PhysicalPerson.class)).thenReturn(person);
+    when(message.getBody()).thenReturn(person);
     when(personService.findById(personId)).thenReturn(Optional.of(person));
 
     // WHEN

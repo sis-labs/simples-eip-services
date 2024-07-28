@@ -23,10 +23,11 @@ public class FetchPersonProcessor extends BasePersonProcessor implements Process
 
     @Override
     public void process(final Exchange exchange) {
-        final var personId = exchange.getIn().getHeader("id", String.class);
+        final var message = exchange.getIn();
+        final var personId = message.getHeader("id", String.class);
         final var person = personsService.findById(personId);
         if (person.isPresent()) {
-            exchange.getIn().setBody(person.get());
+            message.setBody(person.get());
         } else {
             exchange.setException(new RuntimeException("Person not found"));
         }

@@ -26,7 +26,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="org.springframework" level="debug"/>
+        <Logger name="org.springframework" level="warn"/>
         <Logger name="org.apache.cxf.wsdl" level="warn"/>
         <Logger name="io.sample.mnms.irritatedtown" level="trace"/>
         <Root level="warn">
