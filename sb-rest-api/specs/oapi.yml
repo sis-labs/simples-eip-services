@@ -77,7 +77,7 @@ paths:
         - persons
       summary: fetch information about a person in the service.
       description: |-
-        Fetch all information about a person from the service and return those in a
+        Fetch all information about a person from the service and return those in a 
         special DTO.
       parameters:
         - $ref: '#/components/parameters/api_key'

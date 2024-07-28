@@ -25,6 +25,7 @@ public interface PhysicalPersonMapper {
   /**
    * Transform a remote {@link Person} to a {@link PhysicalPerson}.
    *
+
    * @param person the person to transform
    *
    * @return the person transformed

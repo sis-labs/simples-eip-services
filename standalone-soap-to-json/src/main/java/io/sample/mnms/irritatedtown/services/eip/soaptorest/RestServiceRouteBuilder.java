@@ -11,25 +11,27 @@ import org.apache.camel.model.rest.RestBindingMode;
  * @since 0.0.1
  */
 public class RestServiceRouteBuilder extends RouteBuilder {
-  @Override
-  public void configure() throws Exception {
-    // basic configuration to expose web service with Apache Camel.
-    restConfiguration().component("jetty").host("localhost").port(8081).bindingMode(RestBindingMode.json);
+    @Override
+    public void configure() throws Exception {
+        // basic configuration to expose web service with Apache Camel.
+        restConfiguration().component("jetty").host("localhost").port(8081).bindingMode(RestBindingMode.json);
 
-    // Creating rest web service from raw using '/rest' as base context.
-    // We are using '/rest' for rest endpoints and '/soap' for SOAP endpoint in this project.
-    rest("/rest")
+        // Creating rest web service from raw using '/rest' as base context.
+        // We are using '/rest' for rest endpoints and '/soap' for SOAP endpoint in this project.
+        rest("/rest")
 
-        // Route to fetch the list of persons
-        .get("/persons")
-        .consumes("application/json")
-        .produces("application/json")
-        .to("direct:requestPersons")
+                // Route to fetch the list of persons
+                .get("/persons")
+                .apiDocs(true)
+                .consumes("application/json")
+                .produces("application/json")
+                .to("direct:requestPersons")
 
-        // Route to fetch a person using his id.
-        .get("/persons/{id}")
-        .consumes("application/json")
-        .produces("application/json")
-        .to("direct:requestPerson");
-  }
+                // Route to fetch a person using his id.
+                .get("/persons/{id}")
+                .apiDocs(true)
+                .consumes("application/json")
+                .produces("application/json")
+                .to("direct:requestPerson");
+    }
 }

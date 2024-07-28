@@ -1,0 +1,8 @@
+application:
+  # See README.md for information and bug
+  # https://youtrack.jetbrains.com/issue/IDEA-276779/Maven-variable-project.name-no-more-replaced-in-application.yml-file
+  # to show why we are using the hard coded version of the information instead of the dynamic one.
+  # title: '@project.name@'
+  # version: '@project.version@'
+  title: SpringBoot Based Camel EIP
+  version: 1.0-SNAPSHOT
