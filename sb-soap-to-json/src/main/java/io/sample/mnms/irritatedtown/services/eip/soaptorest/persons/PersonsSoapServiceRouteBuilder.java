@@ -42,14 +42,11 @@ public class PersonsSoapServiceRouteBuilder extends RouteBuilder {
     // Processing request to fetch the list of persons
     from("direct:requestPersons")
         .id(ID)
-        .log("Request the list of persons")
         .process(new FetchPersonsProcessor(personsService))
-        .log("Request successfully processed")
         .transform().body();
 
     // Processing request to fetch the details of a given person
     from("direct:requestPerson")
-        .log("Request details about a person")
         .process(new FetchPersonProcessor(personsService))
         .transform().body();
   }
