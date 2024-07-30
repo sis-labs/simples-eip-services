@@ -13,6 +13,9 @@ import org.apache.camel.builder.RouteBuilder;
  * @since 0.0.1
  */
 public class SoapExchangeRouteBuilder extends RouteBuilder {
+
+  public static final String ID = "PERSONS_SOAP_EXCHANGE";
+
   private final PersonsService personsService;
 
   public SoapExchangeRouteBuilder(final PersonsService personsService) {
