@@ -4,6 +4,13 @@ server:
   port: 8082
 
 application:
+  title: gcFacade Soap client
+  # See README.md for information and bug
+  # https://youtrack.jetbrains.com/issue/IDEA-276779/Maven-variable-project.name-no-more-replaced-in-application.yml-file
+  # to show why we are using the hard coded version of the information instead of the dynamic one.
+  # version: '@project.version@'
+  version: 0.0.1
+
   remoteServices:
     persons:
       uri: http://localhost:8080/soap/services/persons

@@ -26,9 +26,9 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="org.springframework" level="info"/>
+        <Logger name="org.springframework" level="warn"/>
         <Logger name="org.apache.tomcat" level="info"/>
-        <Logger name="org.apache.coyote" level="info"/>
+        <Logger name="org.apache.coyote" level="warn"/>
         <Logger name="org.apache.catalina" level="info"/>
         <Logger name="io.sample.mnms.irritatedtown.services" level="trace"/>
         <Root level="warn" additivity="false">

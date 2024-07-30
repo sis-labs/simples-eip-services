@@ -12,7 +12,12 @@ import org.apache.camel.Processor;
  * @version 0.0.1
  * @since 0.0.1
  */
-public class FetchPersonsProcessor extends BasePersonsProcessor implements Processor {
+public class FetchPersonsProcessor extends BasePersonProcessor implements Processor {
+  /**
+   * Create a new instance of the processor.
+   *
+   * @param personsService the reference to the {@link PersonsService} to use inside the processor.
+   */
   public FetchPersonsProcessor(final PersonsService personsService) {
     super(personsService);
   }
@@ -23,6 +28,8 @@ public class FetchPersonsProcessor extends BasePersonsProcessor implements Proce
     // more detailed. By the way, you have to take care about the location of the logic you are implementing since the
     // common-client is designed to embed common business logic related to the client side (infrastructure side) of the
     // service. The common-domain may also use to implement business logic related to the domain.
-    exchange.getIn().setBody(personsService.fetchPersons());
+    // Note: keep variable / call separated in order to let unit tests behave correctly
+    final var persons = personsService.fetchPersons();
+    exchange.getIn().setBody(persons);
   }
 }

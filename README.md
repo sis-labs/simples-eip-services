@@ -186,3 +186,11 @@ See [here](https://github.com/raphw/byte-buddy/issues/1396)
 and [here](https://stackoverflow.com/questions/41956692/could-not-initialize-plugin-interface-org-mockito-plugins-mockmaker))
 
 `-Djdk.attach.allowAttachSelf=true -Dnet.bytebuddy.experimental=true`
+
+## Known issue
+
+### Properties resolution in 'application.yml' files
+Like mentioned [here](https://youtrack.jetbrains.com/issue/IDEA-276779/Maven-variable-project.name-no-more-replaced-in-application.yml-file),
+we have some issue in maven properties resolution in the application.yml files. This leads to output
+like ´@project.version@´ inside the banner. As soon as the bug is closed, it will work. However, we have to
+use another way to set version in the application.yml. For now, we will hard code it.

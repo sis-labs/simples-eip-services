@@ -24,15 +24,22 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <skipUnitTests>false</skipUnitTests>
+        <skipIntegrationTests>false</skipIntegrationTests>
+
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <camel.version>4.7.0</camel.version>
-        <spring-boot.version>3.3.0</spring-boot.version>
+        <spring-boot.version>3.3.2</spring-boot.version>
         <log4j.version>2.23.1</log4j.version>
         <junit.version>5.10.3</junit.version>
         <mockito.version>5.12.0</mockito.version>
         <byte-butty.version>1.14.18</byte-butty.version>
         <objenesis.version>3.3</objenesis.version>
         <cxf.version>4.0.5</cxf.version>
+        <jetty.version>12.0.10</jetty.version>
+        <slf4j.version>2.0.13</slf4j.version>
+        <jakarta-servlet-api.version>6.1.0</jakarta-servlet-api.version>
+        <jakarta-xml.version>4.0.2</jakarta-xml.version>
     </properties>
 
     <dependencyManagement>
@@ -53,11 +60,26 @@
                 <artifactId>log4j-slf4j2-impl</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jul</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
 
             <!-- camel -->
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-core</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-support</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-http-common</artifactId>
                 <version>${camel.version}</version>
             </dependency>
             <dependency>
@@ -75,20 +97,79 @@
                 <artifactId>camel-jetty</artifactId>
                 <version>${camel.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-http</artifactId>
                 <version>${camel.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-http-common</artifactId>
-                <version>${camel.version}</version>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>${cxf.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http-jetty</artifactId>
+                <version>${cxf.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-http</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-io</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-security</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-server</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-util</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-jackson</artifactId>
                 <version>${camel.version}</version>
+            </dependency>
+
+            <!--
+            javax to jakarta
+            -->
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${jakarta-servlet-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.xml.ws</groupId>
+                <artifactId>jakarta.xml.ws-api</artifactId>
+                <version>${jakarta-xml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>${jakarta-xml.version}</version>
             </dependency>
 
             <!-- Serde -->
@@ -98,14 +179,19 @@
                 <version>2.1.3</version>
             </dependency>
             <dependency>
-                <groupId>jakarta.xml.bind</groupId>
-                <artifactId>jakarta.xml.bind-api</artifactId>
-                <version>4.0.2</version>
+                <groupId>jakarta.xml.soap</groupId>
+                <artifactId>jakarta.xml.soap-api</artifactId>
+                <version>3.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>2.17.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-features-metrics</artifactId>
+                <version>${cxf.version}</version>
             </dependency>
 
             <!-- Transformation -->
@@ -171,15 +257,16 @@
                 <artifactId>camel-http-base</artifactId>
                 <version>${camel.version}</version>
             </dependency>
-            <!--<dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-cxf</artifactId>
-                <version>3.17.0</version>
-            </dependency>-->
             <dependency>
                 <groupId>org.apache.camel</groupId>
-                <artifactId>camel-support</artifactId>
+                <artifactId>camel-cxf</artifactId>
                 <version>${camel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-core</artifactId>
+                <version>1.13.2</version>
             </dependency>
 
             <!-- Byte code related dependencies -->
@@ -197,6 +284,11 @@
                 <groupId>org.objenesis</groupId>
                 <artifactId>objenesis</artifactId>
                 <version>${objenesis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>9.7</version>
             </dependency>
 
             <!-- Test dependencies -->
@@ -278,11 +370,69 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.12</version>
+                    <executions>
+                        <execution>
+                            <id>prepare-ut-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Sets the path to the file which contains the execution data. -->
+                                <dataFile>target/jacoco.exec</dataFile>
+                                <!-- Sets the output directory for the code coverage report. -->
+                                <outputDirectory>target/jacoco-ut</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/conf/*.class</exclude>
+                            <exclude>**/dtos/*.class</exclude>
+                            <exclude>**/io/sample/*.class</exclude>
+                            <exclude>**/io/service/*.class</exclude>
+                            <exclude>**/*Application.class</exclude>
+                            <exclude>io/sample/mnms/irritatedtown/services/soap/domain/*.class</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
+            <!--
+            Unit testing
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.3.1</version>
                 <!--
                 This workaround is mandatory to avoid mockito / byte-buddy issue regarding the
                 issue which produce the following stack trace:
@@ -291,9 +441,64 @@
                 specified location
                 -->
                 <configuration>
-                    <argLine>-Djdk.attach.allowAttachSelf=true -Dnet.bytebuddy.experimental=true</argLine>
+                    <argLine>@{argLine} -Djdk.attach.allowAttachSelf=true -Dnet.bytebuddy.experimental=true</argLine>
+                    <skipTests>${skipUnitTests}</skipTests>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <skipTests>${skipIntegrationTests}</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+
+            <!--
+            Prevent usage of any version of log4j affected by the Log4Shell security issue.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>ban-bad-log4j-versions</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>org.apache.logging.log4j:log4j-core:(,2.17.0)</exclude>
+                                    </excludes>
+                                </bannedDependencies>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+        </plugins>
+    </reporting>
 </project>

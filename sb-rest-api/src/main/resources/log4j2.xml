@@ -26,12 +26,10 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="org.springframework" level="info"/>
-        <Logger name="org.apache.tomcat" level="info"/>
-        <Logger name="org.apache.coyote" level="info"/>
-        <Logger name="org.apache.catalina" level="info"/>
-        <Logger name="io.sample.mnms.irritatedtown.services" level="trace"/>
-        <Root level="warn" additivity="false">
+        <Logger name="org.springframework" level="warn"/>
+        <Logger name="org.apache.cxf.wsdl" level="warn"/>
+        <Logger name="io.sample.mnms.irritatedtown" level="trace"/>
+        <Root level="warn">
             <AppenderRef ref="Console"/>
             <!--<AppenderRef ref="File" />-->
         </Root>
