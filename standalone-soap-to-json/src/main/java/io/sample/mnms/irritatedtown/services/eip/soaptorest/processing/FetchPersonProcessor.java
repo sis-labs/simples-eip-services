@@ -11,7 +11,7 @@ import org.apache.camel.Processor;
  * @version 0.0.1
  * @since 0.0.1
  */
-public class FetchPersonProcessor extends BasePersonProcessor implements Processor {
+public class FetchPersonProcessor extends BasePersonsProcessor implements Processor {
   /**
    * Create a new instance of the processor.
    *
